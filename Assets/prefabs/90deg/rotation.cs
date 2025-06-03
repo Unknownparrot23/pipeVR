@@ -25,22 +25,6 @@ public class RotationToPoint : MonoBehaviour
     public Vector3 fromMid;
     public GameObject ang90; 
 
-    private void OnDetachedFromHand(Hand hand)
-    {
-        // Let default detachment happen first
-        hand.HoverUnlock(null);
-        Invoke(nameof(SnapToPosition), 0.2f); // Small delay to ensure physics settles and give a chance to regrab 
-    }
-
-
-    private void SnapToPosition()
-    {
-        float lenght = fromMid.magnitude;
-        Vector3 newPos =fromMid*Radius/lenght;
-        target.localPosition = newPos;
-
-    }
-
     void Update()
     {
         // Calculate direction in local space
@@ -80,33 +64,6 @@ public class RotationToPoint : MonoBehaviour
         }
     }
 
-
-    //    void Update()
-    //    {
-    //        // Calculate direction to target
-    //        Vector3 directionToTarget = target.position - transform.position;
-    //        Vector3 fromMid = directionToTarget - Vector3.Project(directionToTarget, transform.right);
-
-    //        Vector3 fromMidNORM = fromMid;
-    //        fromMidNORM.Normalize();
-
-    //        if(Vector3.SignedAngle(fromMidNORM, transform.forward, transform.right) != 0)
-    //        {
-    //        Quaternion targetRotation = Quaternion.Euler(transform.rotation.eulerAngles.x-Vector3.SignedAngle(fromMidNORM, transform.forward, transform.right), 0, 0);// transform.parent.rotation*
-    //        this.transform.rotation = targetRotation;        
-    //        }
-
-    //// child 
-
-    //        //Quaternion targetRotation = Quaternion.Euler(0f, 0, -Vector3.SignedAngle(fromMidNORM, transform.forward, transform.right));// transform.parent.rotation*
-
-    //        //this.transform.GetChild(0).transform.rotation = targetRotation;// child 
-    //        stick snaper = target.GetComponent<stick>();
-    //        if (snaper != null)
-    //        {
-    //            snaper.DisFromAxis = fromMid;
-    //            snaper.otstup =transform.right;
-    //        }
 
 
 
