@@ -2,6 +2,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
+//A simple script that subscribes to a button and spawns a prefab.
+//Here we need to modify the instance so that when the object is added, it's placed perpendicularly. I assumed all attachment points would show the X-axis along the normal.
+
+// простой скрипт который подписыватьс€ на кнопку и спавнит префаб
+// тут надо изменить instanse так чтобы обьект при добовалнении ставилс€ препендикул€рно. € расчитавал что все точки креплени€ будут показывать x осью по нормале
+
 public class Spawner : MonoBehaviour
 {
     [Header("What to spawn")]

@@ -1,6 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//The  graph manager AI created. Seems decent while I was figuring it out.
+
+//созданный AI менеджер графа. Вроде нормальнный когда я разбирался в нём
+
+
+
 public class AttachmentGraphManager : MonoBehaviour
 {
     // Class to represent an attachment point

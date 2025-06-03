@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
+
+// Restores the object's hierarchy to its pre-grab state.
+// Consider removing this and just enabling the checkbox in the Throwable component instead.
+
+//возращает иерархию до подн€ти€ обьекта.
+//может быть надо убрать и поставить галку в компоненте Throwable 
+
+
 [RequireComponent(typeof(Interactable))]
 public class RestoreHierarchy : MonoBehaviour
 {
@@ -20,13 +28,5 @@ public class RestoreHierarchy : MonoBehaviour
     public void ResetObject()
     {
         transform.SetParent(originalParent);
-
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = false;
-        }
     }
 }

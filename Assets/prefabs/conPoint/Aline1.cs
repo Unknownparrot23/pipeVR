@@ -4,6 +4,11 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
+// Replaces the local coordinate with an adjustable variable, which is set in the inspector when you release this object.  
+
+// Заменяем локальную координату на переменную на указываю в окне когда ты отпускаещь этот обьект
+
+
 [RequireComponent(typeof(Interactable))]
 public class Aline : MonoBehaviour
 {

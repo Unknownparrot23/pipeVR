@@ -3,6 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
+
+// Not tested in VR
+
+// Displays menu on double grab. Awake and Enable methods were AI-generated and appear non-functional.
+// Major issue: Works fine when prefab is pre-placed in scene, but fails during runtime instantiation - hand.GetGrabStarting() != GrabTypes.None always returns false.
+// Should attempt rewrite using Trowable subscription
+// Scene contains single menu instance that hides when inactive. On call, stores reference to triggering object.
+// Core functionality handles menu positioning (distance-based offset and readable rotation)
+
+// не проверен в вр 
+
+// Вызов меню при двойном хватание объекта. Методы Awake и Еnable написаны AI и вроде не работают. 
+// больщая проблем. если префаб с этим обьектом добавлен в сцену зарание всё рабатоет. Но если обьект иницолизирован в runTime почемуто строка hand.GetGrabStarting() != GrabTypes.None не когда не верно
+// надо попробовать преписать с подпиской на Trowable 
+// меню в сцене одно и скрываеться когда не нужно. При вызове сохраняеться относительно какого обьекта вызываеться меню
+// основной текст функции это вызов меню с на растоянии от обьекта и с поворотом для чтения
+
+
+
 public class doubleClickInteractiom : MonoBehaviour
 {
     public float doubleClickTime = 0.3f;

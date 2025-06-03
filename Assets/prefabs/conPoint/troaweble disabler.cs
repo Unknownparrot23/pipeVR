@@ -1,6 +1,9 @@
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
+// Basic Throwable component that ensures proper Rigidbody setup when released
+
+// просто Throwable с удостоверением что когда отпускаешь Rigidbody правильно настроен
 public class NonPhysicalThrowable : Throwable
 {
     protected override void OnDetachedFromHand(Hand hand)
