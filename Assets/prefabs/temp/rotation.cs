@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
-public class PointAtTargetWithTwoFixedAxes : MonoBehaviour
+[RequireComponent(typeof(Interactable))]
+public class rotationToPoint11 : MonoBehaviour
 {
     [Tooltip("The target object to point at")]
     public Transform target;
@@ -16,48 +19,44 @@ public class PointAtTargetWithTwoFixedAxes : MonoBehaviour
     [Tooltip("Rotation speed (0 for instant)")]
     public float rotationSpeed = 0f;
 
+    [Tooltip("Radius")]
+    public float Radius = 0.078f;
+    public Vector3 fromMid;
+
+    //private void OnDetachedFromHand(Hand hand)
+    //{
+    //    // Let default detachment happen first
+    //    hand.HoverUnlock(null);
+    //    Invoke(nameof(SnapToPosition), 0.2f); // Small delay to ensure physics settles and give a chance to regrab 
+    //}
+
+
+    //private void SnapToPosition()
+    //{
+    //    float lenght = fromMid.magnitude;
+    //    Vector3 newPos =fromMid*Radius/lenght;
+    //    target.localPosition = newPos;
+
+    //}
+
+
+
+
     void Update()
     {
-        if (target == null) return;
-
         // Calculate direction to target
         Vector3 directionToTarget = target.position - transform.position;
-        directionToTarget.Normalize();
-        fixedPrimaryAxis = transform.up;
-        fixedSecondaryAxis = transform.forward;
+        Vector3 fromMid = directionToTarget - Vector3.Project(directionToTarget, transform.right);
+        Debug.Log("Found vector: "+fromMid);
+        Vector3 fromMidNORM = fromMid;
+        fromMidNORM.Normalize();
 
-        // Calculate the constrained forward direction
-        // We'll keep two axes fixed, so the third must be perpendicular to both
-        Vector3 constrainedForward = directionToTarget;
+        Quaternion targetRotation = Quaternion.Euler(180f, 90, -Vector3.SignedAngle(fromMidNORM, transform.forward, transform.right));//Quaternion.LookRotation(fromMidNORM,Vector3.up);//     
 
-        // Remove components along the fixed axes
-        constrainedForward -= Vector3.Project(constrainedForward, fixedPrimaryAxis);
-        constrainedForward -= Vector3.Project(constrainedForward, fixedSecondaryAxis);
-        constrainedForward.Normalize();
+        this.transform.GetChild(0).transform.rotation = targetRotation;// child 
 
-        // Calculate the constrained up vector (just use primary fixed axis)
-        Vector3 constrainedUp = fixedPrimaryAxis;
 
-        // Calculate target rotation
-        Quaternion targetRotation;
-        if (constrainedForward != Vector3.zero)
-        {
-            targetRotation = Quaternion.LookRotation(constrainedForward, constrainedUp);
-        }
-        else
-        {
-            // Fallback if we're looking directly along one of the fixed axes
-            targetRotation = Quaternion.LookRotation(transform.forward, constrainedUp);
-        }
 
-        // Apply rotation
-        if (rotationSpeed > 0)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
-        else
-        {
-            transform.rotation = targetRotation;
-        }
+
     }
 }

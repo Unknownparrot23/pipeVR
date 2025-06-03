@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
-public class doubleClickInteractiom : MonoBehaviour
-{
-    public float doubleClickTime = 0.3f;
-    private float lastClickTime;
-    private int clickCount = 0;
-    private Interactable interactable;
-    public GameObject Menu;
-    public GameObject PlayerObj;
-    private Vector3 spawnPos = new Vector3(0.4f, 0.2f, 0);
+public class d2 : MonoBehaviour { 
+public float doubleClickTime = 0.3f;
+private float lastClickTime;
+private int clickCount = 0;
+private Interactable interactable;
+public GameObject Menu;
+public GameObject PlayerObj;
+private Vector3 spawnPos=new Vector3(0.4f,0.2f,0);
 
 
 
@@ -58,23 +57,15 @@ public class doubleClickInteractiom : MonoBehaviour
         // Find by exact name
         PlayerObj = GameObject.Find("Player");
 
-        if (PlayerObj == null)
-        {
-            Debug.LogError("Player object not found in scene!");
-        }
-        else
-        {
-            Debug.Log("Found player: " + PlayerObj.name);
-            if ((PlayerObj.transform.Find("SteamVRObjects")).gameObject.activeInHierarchy)
+            if (PlayerObj == null)
             {
-                PlayerObj = PlayerObj.transform.Find("SteamVRObjects").Find("VRCamera").gameObject;
+                Debug.LogError("Player object not found in scene!");
             }
             else
             {
-                PlayerObj = PlayerObj.transform.Find("NoSteamVRFallbackObjects").Find("FallbackObjects").gameObject;
-            }
+                Debug.Log("Found player: " + PlayerObj.name);
         }
-        Menu = GameObject.Find("Menu");
+        Menu = GameObject.Find("Menu"); 
         if (Menu == null)
         {
             Debug.LogError("Player object not found in scene!");
@@ -115,21 +106,21 @@ public class doubleClickInteractiom : MonoBehaviour
         }
 
     }
+    
 
 
 
 
 
 
-
-    public void OnDoubleClick(Hand hand)
-    {
+public void OnDoubleClick(Hand hand)
+{
         Vector3 playerDir = transform.position - PlayerObj.transform.position;
         spawnPos = playerDir.normalized;
-        spawnPos = Quaternion.AngleAxis(90, Vector3.up) * spawnPos * 0.8f;
+        spawnPos = Quaternion.AngleAxis(90, Vector3.up) * spawnPos*0.8f;
         Menu.transform.position = transform.position + spawnPos;
         Menu.transform.rotation = Quaternion.LookRotation(playerDir);
-        GameObject visibleMenu = Menu.transform.GetChild(0).gameObject;
+        GameObject visibleMenu=Menu.transform.GetChild(0).gameObject;
         visibleMenu.gameObject.SetActive(true);
         Data component = visibleMenu.GetComponent<Data>();
         if (component != null)

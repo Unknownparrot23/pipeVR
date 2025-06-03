@@ -7,35 +7,20 @@ public class RestoreHierarchy : MonoBehaviour
 {
     
     public Transform originalParent;
-    // Start is called before the first frame update
     void Start()
     {
-        // Store original values
         originalParent = transform.parent;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-
 
     private void OnDetachedFromHand(Hand hand)
     {
-        // Let default detachment happen first
         hand.HoverUnlock(null);
-        Invoke(nameof(ResetObject), 0.1f); // Small delay to ensure physics settles
+        Invoke(nameof(ResetObject), 0.1f);
     }
     public void ResetObject()
     {
-        // Detach from hand
-        print("your here");
         transform.SetParent(originalParent);
 
-
-        // If using rigidbody, reset physics
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {

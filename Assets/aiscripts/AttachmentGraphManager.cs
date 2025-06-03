@@ -14,9 +14,10 @@ public class AttachmentGraphManager : MonoBehaviour
         public GameObject connectedObject; // What object is attached here
         public string connectedPointId; // Which point on the other object we're connected to
 
-        public AttachmentPoint(string id, Vector3 localPosition, Quaternion localRotation)
+        public AttachmentPoint(string id,Vector3 localPosition, Quaternion localRotation, GameObject connectionPoint)
         {
             this.id = id;
+            this.connectedObject= connectionPoint; // What object is attached here
             this.localPosition = localPosition;
             this.localRotation = localRotation;
         }
@@ -34,11 +35,11 @@ public class AttachmentGraphManager : MonoBehaviour
             this.obj = obj;
         }
 
-        public void AddAttachmentPoint(string id, Vector3 localPosition, Quaternion localRotation)
+        public void AddAttachmentPoint(string id, Vector3 localPosition, Quaternion localRotation, GameObject connectionPoint)
         {
             if (!attachmentPoints.ContainsKey(id))
             {
-                attachmentPoints.Add(id, new AttachmentPoint(id, localPosition, localRotation));
+                attachmentPoints.Add(id, new AttachmentPoint(id, localPosition, localRotation,connectionPoint));
             }
         }
 
@@ -62,7 +63,7 @@ public class AttachmentGraphManager : MonoBehaviour
 
             foreach (var point in attachmentPoints)
             {
-                newObject.AddAttachmentPoint(point.Key, point.Value.localPosition, point.Value.localRotation);
+                newObject.AddAttachmentPoint(point.Key, point.Value.localPosition, point.Value.localRotation,point.Value.connectedObject);
             }
 
             Debug.Log($"Registered object {obj.name} with {attachmentPoints.Count} attachment points");
@@ -210,4 +211,5 @@ public struct AttachmentData
     public string id;
     public Vector3 localPosition;
     public Quaternion localRotation;
+    public GameObject connectedObject;
 }

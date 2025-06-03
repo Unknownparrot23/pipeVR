@@ -26,17 +26,14 @@ public class pointto : MonoBehaviour
         Quaternion rotOfunitVector = transform.rotation;
         Vector3 unitVector = new Vector3(1, 0, 0);
         unitVector = rotOfunitVector * unitVector;
-        //print(ConnectingVector);
+
         float Scale = (Vector3.Dot(ConnectingVector, unitVector))/ PipeLength;
-        //float Scale = ConnectingVector.x / PipeLength;
-        //print(Scalex);
+
         Vector3 antiparentscale = transform.localScale;
         antiparentscale.x = 1 / antiparentscale.x;                     
         antiparentscale.y = Scale / antiparentscale.y;
         antiparentscale.z = 1/ antiparentscale.z;                        
-        modelToConnect.transform.localScale=antiparentscale; //= ConnectingVector.magnitude/PipeLength;
-
-        // modelToConnect.transform.rotation = Quaternion.LookRotation(ConnectingVector)* Quaternion.LookRotation(new Vector3 (0f, 1f, 0f));      always point to point
+        modelToConnect.transform.localScale=antiparentscale; 
 
     }
 }

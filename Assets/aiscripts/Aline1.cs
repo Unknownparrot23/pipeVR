@@ -19,7 +19,7 @@ public class Aline : MonoBehaviour
     {
         // Let default detachment happen first
         hand.HoverUnlock(null);
-        Invoke(nameof(SnapToPosition), 0.2f); // Small delay to ensure physics settles
+        Invoke(nameof(SnapToPosition), 0.21f); // Small delay to ensure physics settles and give a chance to regrab 
     }
   
 

@@ -700,7 +700,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 2
+  m_Text: 90 deg angel
 --- !u!114 &3998223538887324667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1149,7 +1149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5eb024789856b4eb5d29d56d2d7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 3776164825405925002, guid: 8167daa95c16c454d8155008935a1028, type: 3}
+  objectToSpawn: {fileID: 3776164825405925002, guid: 1b984084010332644b3e831348e84704, type: 3}
   spawnLocation: {fileID: 0}
   spawnButton: {fileID: 9206231754619284503}
 --- !u!114 &6441817689131394729
@@ -1456,7 +1456,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: 3 way spliter
 --- !u!114 &5385500647632444454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1821,7 +1821,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 4
+  m_Text: 4 way spliter
 --- !u!114 &1806334108012403927
 MonoBehaviour:
   m_ObjectHideFlags: 0
