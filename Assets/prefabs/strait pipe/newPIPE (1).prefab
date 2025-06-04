@@ -106,7 +106,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -288,7 +288,19 @@ MonoBehaviour:
   restoreOriginalParent: 0
   onPickUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2661661590809484644}
+        m_TargetAssemblyTypeName: doubleClickInteractiom, Assembly-CSharp
+        m_MethodName: regeseraclick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDetachFromHand:
     m_PersistentCalls:
       m_Calls: []
@@ -415,7 +427,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -574,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3db2cba6461394daaa03c85b5932d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attachmentPoints: []
 --- !u!1001 &347250049967978499
 PrefabInstance:
   m_ObjectHideFlags: 0
