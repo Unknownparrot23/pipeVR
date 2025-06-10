@@ -35,9 +35,10 @@ public class RotationToPoint : MonoBehaviour
     public float rotationSpeed = 0f;
 
     [Tooltip("Radius")]
-    public float Radius = 0.078f;
-    public Vector3 fromMid;
-    public GameObject ang90; 
+    public float Radius = 0.075f;
+    
+    [SerializeField]public Vector3 fromMid;
+    public GameObject ang90;
 
     void Update()
     {
@@ -50,7 +51,7 @@ public class RotationToPoint : MonoBehaviour
         fromMid.Normalize();
 
         float angle = Vector3.SignedAngle(fromMid, Vector3.forward, Vector3.right);
-
+        this.fromMid = fromMid;
         if (Mathf.Abs(angle) > 0.01f) // Small threshold to prevent jitter
         {
             Quaternion targetRotation;
@@ -65,20 +66,27 @@ public class RotationToPoint : MonoBehaviour
             else
             {
                 targetRotation = Quaternion.AngleAxis(-angle, Vector3.right);
-                transform.localRotation = targetRotation;
+                transform.localRotation = targetRotation ;
+                target.transform.localRotation= targetRotation*Quaternion.Euler(0,-90,0);
             }
         }
 
-        // Update stick component if exists
-        stick snaper = target.GetComponent<stick>();
-        if (snaper != null)
-        {
-            snaper.DisFromAxis = fromMid;
-            snaper.otstup = Vector3.right;
-        }
     }
+    private void delayCoordinates()
+    {
+        
+        float length = fromMid.magnitude;
+        Vector3 newPos = fromMid * Radius / length;
+        Debug.Log("fromMid "+fromMid+" Radius"+Radius+"newPos"+newPos);
+        target.transform.localPosition = newPos - (Vector3.right * Radius);
 
-
+    }
+    public void CylindricalCardiants()
+    {
+        Debug.Log("Detached");
+        //hand.HoverUnlock(null);
+        Invoke(nameof(delayCoordinates), 0.2f); // Small delay to ensure physics settles and give a chance to regrab 
+    }
 
 
 }

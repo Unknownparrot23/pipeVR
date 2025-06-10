@@ -30,21 +30,21 @@ public class stick : MonoBehaviour
 
 
 
-    private void OnDetachedFromHand(Hand hand)
-    {
-        hand.HoverUnlock(null);
-        Invoke(nameof(SnapToPosition), 0.2f); // Small delay to ensure physics settles and give a chance to regrab 
-    }
+    //private void OnDetachedFromHand(Hand hand)
+    //{
+    //    hand.HoverUnlock(null);
+    //    Invoke(nameof(SnapToPosition), 0.2f); // Small delay to ensure physics settles and give a chance to regrab 
+    //}
 
 
-    private void SnapToPosition()
-    {
+    //private void SnapToPosition()
+    //{
 
-        RotationToPoint ROTcomponent = StartObject.GetComponent<RotationToPoint>();
-        float lenght = DisFromAxis.magnitude;
-        Vector3 newPos = DisFromAxis * ROTcomponent.Radius / lenght;
-        transform.localPosition = newPos+ (otstup * ROTcomponent.Radius);
-    }
+    //    CylindricalCardiants ROTcomponent = StartObject.GetComponent<CylindricalCardiants>();
+    //    float length = DisFromAxis.magnitude;
+    //    Vector3 newPos = DisFromAxis * ROTcomponent.Radius / length;
+    //    transform.localPosition = newPos -(otstup * ROTcomponent.Radius);
+    //}
 
 
 }

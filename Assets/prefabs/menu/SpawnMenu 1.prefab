@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 496875080854096658}
   - component: {fileID: 8876664486160357437}
   m_Layer: 0
-  m_Name: alien
+  m_Name: 3way
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 6337483714059566623}
   - component: {fileID: 1690618660425667826}
   m_Layer: 0
-  m_Name: thin glove
+  m_Name: 90angel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -731,7 +731,7 @@ GameObject:
   - component: {fileID: 1632672447823939806}
   - component: {fileID: 1569964380121279656}
   m_Layer: 0
-  m_Name: floppy
+  m_Name: 4way
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

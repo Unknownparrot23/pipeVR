@@ -103,7 +103,7 @@ public class doubleClickInteractiom : MonoBehaviour
     }
 
 
-    public void regeseraclick()
+    public void RegisterClick()
     {
                 if (Time.time - lastClickTime < doubleClickTime)
                 {
@@ -115,7 +115,6 @@ public class doubleClickInteractiom : MonoBehaviour
                 else
                 {
                     clickCount = 1;
-                    Debug.Log("Hovering3");
                 }
                 lastClickTime = Time.time;
     }

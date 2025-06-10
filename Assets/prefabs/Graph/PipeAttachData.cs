@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 //When a prefab is added (this script is placed in an empty object), it records all attachment points and registers the object they belong to.
@@ -11,8 +12,6 @@ using UnityEngine;
 
 public class PipeAttachData : MonoBehaviour
 {
-    public AttachmentData[] attachmentPoints;
-
     //void Awake()
     //{
     //    for (int i = 0; i <= transform.childCount ; i++)
@@ -24,15 +23,18 @@ public class PipeAttachData : MonoBehaviour
     //        attachmentPoints[i].localRotation = attachmentPoints[i].connectedObject.transform.localRotation;
     //    }
     //}
+    public AttachmentData[] attachmentPoints;
+
     void Start()
     {
-        for (int i = 0; i <= transform.childCount; i++)
-
+        attachmentPoints = new AttachmentData[transform.childCount];
+        for (int i = 0; i < transform.childCount; i++)
         {
-            attachmentPoints[i].connectedObject = transform.GetChild(i).gameObject;
-            attachmentPoints[i].id = attachmentPoints[i].connectedObject.name;
-            attachmentPoints[i].localPosition = attachmentPoints[i].connectedObject.transform.localPosition;
-            attachmentPoints[i].localRotation = attachmentPoints[i].connectedObject.transform.localRotation;
+            attachmentPoints[i]= new AttachmentData();
+            attachmentPoints[i].PointObject = transform.GetChild(i).gameObject;
+            attachmentPoints[i].id = attachmentPoints[i].PointObject.name;
+            attachmentPoints[i].localPosition = attachmentPoints[i].PointObject.transform.localPosition;
+            attachmentPoints[i].localRotation = attachmentPoints[i].PointObject.transform.localRotation;
         }
         Dictionary<string, AttachmentData> pointsDict = new Dictionary<string, AttachmentData>();
         foreach (var point in attachmentPoints)

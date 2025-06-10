@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 1381031715091805807}
   - component: {fileID: 3826601718355629748}
   - component: {fileID: 4003944048556055963}
-  - component: {fileID: 7200957948925551835}
-  - component: {fileID: 7723288778195722731}
+  - component: {fileID: 2038013229717737406}
+  - component: {fileID: 101674462496974606}
   m_Layer: 0
   m_Name: End
   m_TagString: ConectionPoint
@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 693713499775313203}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.075, y: 0, z: -0.075}
+  m_LocalPosition: {x: -0.078, y: 0, z: -0.078}
   m_LocalScale: {x: 0.019999998, y: 0.019999998, z: 0.02}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -297,7 +297,26 @@ MonoBehaviour:
   doubleClickTime: 0.3
   Menu: {fileID: 0}
   PlayerObj: {fileID: 0}
---- !u!114 &7200957948925551835
+--- !u!114 &2038013229717737406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693713499775313203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a42bbf85bd4b44187c8527988d0c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 4489680771565650430}
+  fixedPrimaryAxis: {x: 0, y: 1, z: 0}
+  fixedSecondaryAxis: {x: 1, y: 0, z: 0}
+  rotationSpeed: 0
+  Radius: 0.078
+  fromMid: {x: 0, y: 0, z: 0}
+  ang90: {fileID: 0}
+--- !u!114 &101674462496974606
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -311,24 +330,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerTag: ConectionPoint
   triggerOnce: 1
-  requireBothTriggers: 1
-  hasTriggered: 0
-  holdingHand: {fileID: 0}
-  isHeld: 0
-  onlyPoint: 0
---- !u!114 &7723288778195722731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693713499775313203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98822c47756f9704da85122e48f9e87b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalParent: {fileID: 0}
 --- !u!1 &1154812328571316192
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,9 +343,8 @@ GameObject:
   - component: {fileID: 4234925895869994521}
   - component: {fileID: 4861897462583303686}
   - component: {fileID: 705737370824940604}
-  - component: {fileID: 264023522895479883}
   m_Layer: 0
-  m_Name: 90angel
+  m_Name: tempangel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -513,18 +513,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentPoints: []
---- !u!114 &264023522895479883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1154812328571316192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 171b9797b6fa8d44eb37cf0ec5de3d20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4568499477959979876
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,9 +860,9 @@ GameObject:
   - component: {fileID: 5299967277412069818}
   - component: {fileID: 4126376499346280604}
   - component: {fileID: 7865802766603649111}
-  - component: {fileID: 2732090202747562472}
-  - component: {fileID: 8837999603742150794}
-  - component: {fileID: 6678290424999231562}
+  - component: {fileID: 5431885744140167337}
+  - component: {fileID: 2876116867853847872}
+  - component: {fileID: 7593695180105921292}
   m_Layer: 0
   m_Name: Start
   m_TagString: ConectionPoint
@@ -976,7 +964,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7247450858739734276}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75a42bbf85bd4b44187c8527988d0c02, type: 3}
   m_Name: 
@@ -1040,7 +1028,7 @@ MonoBehaviour:
   highlightOnHover: 1
   hideHighlight: []
   hoverPriority: 0
---- !u!54 &2732090202747562472
+--- !u!54 &5431885744140167337
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1062,12 +1050,66 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8837999603742150794
+--- !u!114 &2876116867853847872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7247450858739734276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24dfb251abc9d054faf5b48a52f348a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attachmentFlags: 44
+  attachmentOffset: {fileID: 0}
+  catchingSpeedThreshold: -1
+  releaseVelocityStyle: 1
+  releaseVelocityTimeOffset: -0.011
+  scaleReleaseVelocity: 1.1
+  scaleReleaseVelocityThreshold: -1
+  scaleReleaseVelocityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  restoreOriginalParent: 0
+  onPickUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onDetachFromHand:
+    m_PersistentCalls:
+      m_Calls: []
+  onHeldUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  interactable: {fileID: 0}
+--- !u!114 &7593695180105921292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1081,21 +1123,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerTag: ConectionPoint
   triggerOnce: 1
-  requireBothTriggers: 1
-  hasTriggered: 0
-  holdingHand: {fileID: 0}
-  isHeld: 0
-  onlyPoint: 0
---- !u!114 &6678290424999231562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7247450858739734276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98822c47756f9704da85122e48f9e87b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalParent: {fileID: 0}

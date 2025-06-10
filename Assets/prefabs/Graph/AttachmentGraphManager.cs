@@ -20,13 +20,18 @@ public class AttachmentGraphManager : MonoBehaviour
         public Quaternion localRotation; // Rotation relative to parent object
         public GameObject connectedObject; // What object is attached here
         public string connectedPointId; // Which point on the other object we're connected to
-
-        public AttachmentPoint(string id,Vector3 localPosition, Quaternion localRotation, GameObject connectionPoint)
+        public GameObject PointObject;
+        public AttachmentPoint(string id,Vector3 localPosition, Quaternion localRotation, GameObject PointObject)
         {
             this.id = id;
-            this.connectedObject= connectionPoint; // What object is attached here
+            this.PointObject = PointObject; // What object is attached here
             this.localPosition = localPosition;
             this.localRotation = localRotation;
+        }
+        public void Refresh()
+        {
+            this.localPosition = PointObject.transform.localPosition;
+            this.localRotation = PointObject.transform.localRotation;
         }
     }
 
@@ -42,23 +47,24 @@ public class AttachmentGraphManager : MonoBehaviour
             this.obj = obj;
         }
 
-        public void AddAttachmentPoint(string id, Vector3 localPosition, Quaternion localRotation, GameObject connectionPoint)
+        public void AddAttachmentPoint(string id, Vector3 localPosition, Quaternion localRotation, GameObject PointObject)
         {
             if (!attachmentPoints.ContainsKey(id))
             {
-                attachmentPoints.Add(id, new AttachmentPoint(id, localPosition, localRotation,connectionPoint));
+                attachmentPoints.Add(id, new AttachmentPoint(id, localPosition, localRotation, PointObject));
             }
         }
 
         public bool IsAttachmentPointFree(string pointId)
         {
+            Debug.Log("contains "+attachmentPoints.ContainsKey(pointId)+" presoeden "+ attachmentPoints[pointId].connectedObject);
             return attachmentPoints.ContainsKey(pointId) &&
                    attachmentPoints[pointId].connectedObject == null;
         }
     }
 
     // Main graph storage
-    private Dictionary<GameObject, AttachableObject> objectGraph = new Dictionary<GameObject, AttachableObject>();          //when it runs?
+    public Dictionary<GameObject, AttachableObject> objectGraph = new Dictionary<GameObject, AttachableObject>();          //when it runs?
 
     // Register a new object with its attachment points
     public void RegisterObject(GameObject obj, Dictionary<string, AttachmentData> attachmentPoints)
@@ -70,7 +76,7 @@ public class AttachmentGraphManager : MonoBehaviour
 
             foreach (var point in attachmentPoints)
             {
-                newObject.AddAttachmentPoint(point.Key, point.Value.localPosition, point.Value.localRotation,point.Value.connectedObject);
+                newObject.AddAttachmentPoint(point.Key, point.Value.localPosition, point.Value.localRotation,point.Value.PointObject);
             }
 
             Debug.Log($"Registered object {obj.name} with {attachmentPoints.Count} attachment points");
@@ -80,6 +86,11 @@ public class AttachmentGraphManager : MonoBehaviour
     // Connect two objects at specific attachment points
     public bool ConnectObjects(GameObject obj1, string pointId1, GameObject obj2, string pointId2)
     {
+        foreach (GameObject key in objectGraph.Keys)
+        {
+            Debug.Log("Key: " + key.GetInstanceID());
+        }
+        Debug.Log("ConnectObjects is called obj1: "+ !objectGraph.ContainsKey(obj1)+ " name: " + obj1.name + "  " + obj1.GetInstanceID()+ "  obj2: " + !objectGraph.ContainsKey(obj2)+" name: "+obj2.name+"  "+ obj2.GetInstanceID());
         if (!objectGraph.ContainsKey(obj1) || !objectGraph.ContainsKey(obj2))
         {
             Debug.LogWarning("One or both objects not registered");
@@ -123,23 +134,25 @@ public class AttachmentGraphManager : MonoBehaviour
     }
 
     // Position two connected objects so their attachment points align
-    private void PositionConnectedObjects(GameObject obj1, string pointId1, GameObject obj2, string pointId2)
+    private void PositionConnectedObjects(GameObject obj2, string pointId2, GameObject obj1, string pointId1)
     {
         AttachableObject aObj1 = objectGraph[obj1];
         AttachableObject aObj2 = objectGraph[obj2];
 
-        // Get world positions of attachment points
+        // Get world positions and rotations of attachment points
         Vector3 worldPos1 = obj1.transform.TransformPoint(aObj1.attachmentPoints[pointId1].localPosition);
         Quaternion worldRot1 = obj1.transform.rotation * aObj1.attachmentPoints[pointId1].localRotation;
 
         Vector3 worldPos2 = obj2.transform.TransformPoint(aObj2.attachmentPoints[pointId2].localPosition);
         Quaternion worldRot2 = obj2.transform.rotation * aObj2.attachmentPoints[pointId2].localRotation;
 
-        // Calculate how to position obj2 so its attachment point matches obj1's
-        // We'll move obj2 so that point2 meets point1, and rotate to match orientations
-        Quaternion relativeRot = Quaternion.Inverse(worldRot2) * worldRot1;
-        obj2.transform.rotation = relativeRot * obj2.transform.rotation;
+        // Calculate the rotation that makes obj2's X-axis opposite to obj1's X-axis
+        Quaternion flipXRotation = Quaternion.FromToRotation(worldRot2 * Vector3.right, worldRot1 * -Vector3.right);
 
+        // Apply the rotation to obj2
+        obj2.transform.rotation = flipXRotation * obj2.transform.rotation;
+
+        // Position obj2 so the attachment points meet
         Vector3 offset = worldPos1 - obj2.transform.TransformPoint(aObj2.attachmentPoints[pointId2].localPosition);
         obj2.transform.position += offset;
     }
@@ -218,5 +231,5 @@ public struct AttachmentData
     public string id;
     public Vector3 localPosition;
     public Quaternion localRotation;
-    public GameObject connectedObject;
+    public GameObject PointObject;
 }

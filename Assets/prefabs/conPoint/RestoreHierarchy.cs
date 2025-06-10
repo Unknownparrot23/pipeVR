@@ -13,7 +13,6 @@ using Valve.VR.InteractionSystem;
 [RequireComponent(typeof(Interactable))]
 public class RestoreHierarchy : MonoBehaviour
 {
-    
     public Transform originalParent;
     void Start()
     {
