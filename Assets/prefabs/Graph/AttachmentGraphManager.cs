@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//The  graph manager AI created. Seems decent while I was figuring it out.
+//The  graph manager .
 
-//созданный AI менеджер графа. Вроде нормальнный когда я разбирался в нём
+//созданный менеджер графа. 
 
 
 

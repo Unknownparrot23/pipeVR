@@ -6,7 +6,7 @@ using Valve.VR.InteractionSystem;
 
 // Replaces the local coordinate with an adjustable variable, which is set in the inspector when you release this object.  
 
-// Заменяем локальную координату на переменную на указываю в окне когда ты отпускаещь этот обьект
+// Заменяем локальную координату на переменную на указываю в окне когда ты отпускаешь этот объект
 
 
 [RequireComponent(typeof(Interactable))]
@@ -24,7 +24,9 @@ public class Aline : MonoBehaviour
     {
         // Let default detachment happen first
         hand.HoverUnlock(null);
-        Invoke(nameof(SnapToPosition), 0.21f); // Small delay to ensure physics settles and give a chance to regrab 
+        // Small delay to ensure physics settles and give a chance to regrip
+        Invoke(nameof(SnapToPosition), 0.21f);
+
     }
   
 

@@ -4,23 +4,14 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
-// Not tested in VR
 
 // Displays menu on double grab. Awake and Enable methods were AI-generated and appear non-functional.
-
 // Scene contains single menu instance that hides when inactive. On call, stores reference to triggering object.
 // Core functionality handles menu positioning (distance-based offset and readable rotation)
-
-
-// не проверен в вр 
-
-// Вызов меню при двойном хватание объекта. Методы Awake и Еnable написаны AI и вроде не работают. 
-// меню в сцене одно и скрываеться когда не нужно. При вызове сохраняеться относительно какого обьекта вызываеться меню
-// основной текст функции это вызов меню с на растоянии от обьекта и с поворотом для чтения
-
-
-
-public class doubleClickInteractiom : MonoBehaviour
+// Вызов меню при двойном хватание объекта. Методы Awake и Enable написаны AI и вроде не работают. 
+// меню в сцене одно и скрывается когда не нужно. При вызове сохраняется относительно какого объекта вызывается меню
+// основной текст функции это вызов меню с на расстоянии от объекта и с поворотом для чтения
+public class doubleClickInteraction : MonoBehaviour
 {
     public float doubleClickTime = 0.3f;
     private float lastClickTime;
@@ -29,46 +20,21 @@ public class doubleClickInteractiom : MonoBehaviour
     public GameObject Menu;
     public GameObject PlayerObj;
     private Vector3 spawnPos = new Vector3(0.4f, 0.2f, 0);
-
-
-
-    void Awake()
+    public void RegisterClick()
     {
-        // Ensure the Interactable component is properly configured
-        var interactable = GetComponent<Valve.VR.InteractionSystem.Interactable>();
-        if (interactable == null)
-        {
-            interactable = gameObject.AddComponent<Valve.VR.InteractionSystem.Interactable>();
-        }
+                if (Time.time - lastClickTime < doubleClickTime)
+                {
+                    Debug.Log("clickCount: " + clickCount);
 
-        // Other necessary SteamVR components
-        var throwable = GetComponent<Valve.VR.InteractionSystem.Throwable>();
-        if (throwable == null)
-        {
-            throwable = gameObject.AddComponent<Valve.VR.InteractionSystem.Throwable>();
-        }
+                    OnDoubleClick();
+                    clickCount = 0;
+                }
+                else
+                {
+                    clickCount = 1;
+                }
+                lastClickTime = Time.time;
     }
-
-    void OnEnable()
-    {
-        Valve.VR.InteractionSystem.Interactable interactable = GetComponent<Valve.VR.InteractionSystem.Interactable>();
-        if (interactable != null)
-        {
-            //interactable.onAttachedToHand += OnAttachedToHand;
-            //interactable.onDetachedFromHand += OnDetachedFromHand;
-        }
-    }
-
-    void OnDisable()
-    {
-        Valve.VR.InteractionSystem.Interactable interactable = GetComponent<Valve.VR.InteractionSystem.Interactable>();
-        if (interactable != null)
-        {
-            //interactable.onAttachedToHand -= OnAttachedToHand;
-            //interactable.onDetachedFromHand -= OnDetachedFromHand;
-        }
-    }
-
     private void Start()
     {
         interactable = GetComponent<Interactable>();
@@ -101,30 +67,6 @@ public class doubleClickInteractiom : MonoBehaviour
             Debug.Log("Found player: " + Menu.name);
         }
     }
-
-
-    public void RegisterClick()
-    {
-                if (Time.time - lastClickTime < doubleClickTime)
-                {
-                    Debug.Log("clickCount: " + clickCount);
-
-                    OnDoubleClick();
-                    clickCount = 0;
-                }
-                else
-                {
-                    clickCount = 1;
-                }
-                lastClickTime = Time.time;
-    }
-
-
-
-
-
-
-
     public void OnDoubleClick()
     {
         Vector3 playerDir = transform.position - PlayerObj.transform.position;

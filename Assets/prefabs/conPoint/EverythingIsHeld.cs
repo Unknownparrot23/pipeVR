@@ -5,7 +5,6 @@ using Valve.VR.InteractionSystem;
 
 public class EverythingIsHeld : MonoBehaviour
 {
-    // Start is called before the first frame update
     private void OnAttachedToHand(Hand hand)
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -17,17 +16,6 @@ public class EverythingIsHeld : MonoBehaviour
             component.holdingHand = hand;
         }
     }
-
-    //public void EisHeld()
-    //{
-    //    for (int i = 0; i < transform.childCount; i++)
-    //    {
-    //        GameObject conpoint= transform.GetChild(i).gameObject;
-    //        HeldObjectTrigger component = conpoint.GetComponent<HeldObjectTrigger>();
-    //        component.isHeld = true;
-    //        component.hasTriggered = false;
-    //    }
-    //}
     public void OnDetachFromHand(Hand hand)
     {
         for (int i = 0; i < transform.childCount; i++)

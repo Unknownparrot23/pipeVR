@@ -1,12 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
-
-
-
-
-
-
 [RequireComponent(typeof(Interactable))]
 [RequireComponent(typeof(Rigidbody))]
 public class HeldObjectTrigger : MonoBehaviour
@@ -33,20 +27,15 @@ public class HeldObjectTrigger : MonoBehaviour
         hasTriggered = false; // Reset trigger state when picked up
         onlyPoint = true;
     }
-
     private void OnDetachedFromHand(Hand hand)
     {
         isHeld = false;
         holdingHand = null;
         onlyPoint = false;
     }
-
     private void OnTriggerEnter(Collider other)
     {
-
         if (!isHeld) return; // Only trigger when held
-
-        // Check if both objects need to be triggers
         if (requireBothTriggers)
         {
             if (!other.isTrigger || !GetComponent<Collider>().isTrigger) return;
@@ -62,34 +51,22 @@ public class HeldObjectTrigger : MonoBehaviour
             }
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(triggerTag))
         {
             // Reset trigger state when leaving the collision
-            // Useful if you want to allow multiple triggers per hold
             hasTriggered = false;
         }
     }
-
-    // Example function that gets called - replace with your own
     private void TargetFunction(GameObject target, Hand holdingHand)
     {
         Debug.Log("Triggered with " + target.name + " while being held!");
 
-        // Example: Change color of the target object
-        Renderer targetRenderer = target.GetComponent<Renderer>();
-        if (targetRenderer != null)
-        {
-            targetRenderer.material.color = new Color(
-                Random.value,
-                Random.value,
-                Random.value
-            );
-        }
         RestoreHierarchy Restore = GetComponent<RestoreHierarchy>();
-        if (onlyPoint) { holdingHand.DetachObject(gameObject); }
+        if (onlyPoint) {
+            return; //Alt atach method
+         }
         else { holdingHand.DetachObject(transform.parent.gameObject); }
         FindObjectOfType<AttachmentGraphManager>().ConnectObjects(Restore.originalParent.GameObject(), transform.name,target.transform.parent.gameObject,     target.transform.name);
 
