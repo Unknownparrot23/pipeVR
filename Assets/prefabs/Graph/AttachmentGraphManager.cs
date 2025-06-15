@@ -64,7 +64,7 @@ public class AttachmentGraphManager : MonoBehaviour
     }
 
     // Main graph storage
-    public Dictionary<GameObject, AttachableObject> objectGraph = new Dictionary<GameObject, AttachableObject>();          //when it runs?
+    public Dictionary<GameObject, AttachableObject> objectGraph = new Dictionary<GameObject, AttachableObject>();      
 
     // Register a new object with its attachment points
     public void RegisterObject(GameObject obj, Dictionary<string, AttachmentData> attachmentPoints)
@@ -224,7 +224,6 @@ public class AttachmentGraphManager : MonoBehaviour
     }
 }
 
-// Helper struct to define attachment points in the Inspector
 [System.Serializable]
 public struct AttachmentData
 {

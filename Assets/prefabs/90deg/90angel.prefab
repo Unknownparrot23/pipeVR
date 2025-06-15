@@ -269,6 +269,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactable: {fileID: 0}
+  originalParent: {fileID: 0}
 --- !u!114 &3826601718355629748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,7 +986,7 @@ MonoBehaviour:
   fixedPrimaryAxis: {x: 0, y: 1, z: 0}
   fixedSecondaryAxis: {x: 1, y: 0, z: 0}
   rotationSpeed: 0
-  Radius: 0.078
+  Radius: 0.075
   fromMid: {x: 0, y: 0, z: 0}
   ang90: {fileID: 0}
 --- !u!114 &7865802766603649111

@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
+using static AttachmentGraphManager;
 [RequireComponent(typeof(Interactable))]
 [RequireComponent(typeof(Rigidbody))]
 public class HeldObjectTrigger : MonoBehaviour
@@ -24,7 +26,7 @@ public class HeldObjectTrigger : MonoBehaviour
     {
         holdingHand = hand;
         isHeld = true;
-        hasTriggered = false; // Reset trigger state when picked up
+        hasTriggered = false;
         onlyPoint = true;
     }
     private void OnDetachedFromHand(Hand hand)
@@ -35,7 +37,7 @@ public class HeldObjectTrigger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!isHeld) return; // Only trigger when held
+        if (!isHeld) return;
         if (requireBothTriggers)
         {
             if (!other.isTrigger || !GetComponent<Collider>().isTrigger) return;
@@ -55,7 +57,6 @@ public class HeldObjectTrigger : MonoBehaviour
     {
         if (other.CompareTag(triggerTag))
         {
-            // Reset trigger state when leaving the collision
             hasTriggered = false;
         }
     }
@@ -67,8 +68,22 @@ public class HeldObjectTrigger : MonoBehaviour
         if (onlyPoint) {
             return; //Alt atach method
          }
-        else { holdingHand.DetachObject(transform.parent.gameObject); }
-        FindObjectOfType<AttachmentGraphManager>().ConnectObjects(Restore.originalParent.GameObject(), transform.name,target.transform.parent.gameObject,     target.transform.name);
+        else { holdingHand.DetachObject(transform.parent.gameObject);
+            AttachmentGraphManager graph =FindObjectOfType<AttachmentGraphManager>();
+            foreach (KeyValuePair<GameObject, AttachableObject> pair in graph.objectGraph)
+            {
+                AttachableObject obj =pair.Value;
+                foreach (KeyValuePair<string, AttachmentPoint> athPoints in obj.attachmentPoints)
+                {
+                    AttachmentPoint objpoint= athPoints.Value;
+                    objpoint.Refresh();
+                }
+            }
+        }
+        FindObjectOfType<AttachmentGraphManager>().ConnectObjects(Restore.originalParent.GameObject(), 
+                                                                    transform.name,
+                                                                    target.transform.parent.gameObject,
+                                                                    target.transform.name);
 
     }
 }
