@@ -9,19 +9,15 @@ public class HeldObjectTrigger : MonoBehaviour
 {
     [Header("Trigger Settings")]
     [Tooltip("Tag of objects that will trigger the function")]
-    public string triggerTag = "ConectionPoint";
-
+    public string triggerTag = "ConectionPoint";                                                                                                      //ConectionPoint
     [Tooltip("Should the function only be called once per hold?")]
     public bool triggerOnce = true;
-
     [Tooltip("Should both objects need to be triggers?")]
     public bool requireBothTriggers = true;
-
     public bool hasTriggered = false;
     public Hand holdingHand;
     public bool isHeld = false;
     public bool onlyPoint = false;
-
     private void OnAttachedToHand(Hand hand)
     {
         holdingHand = hand;
@@ -42,10 +38,8 @@ public class HeldObjectTrigger : MonoBehaviour
         {
             if (!other.isTrigger || !GetComponent<Collider>().isTrigger) return;
         }
-
         if (other.CompareTag(triggerTag))
         {
-
             if (!triggerOnce || (triggerOnce && !hasTriggered))
             {
                 TargetFunction(other.gameObject, holdingHand);
@@ -68,7 +62,10 @@ public class HeldObjectTrigger : MonoBehaviour
         if (onlyPoint) {
             return; //Alt atach method
          }
-        else { holdingHand.DetachObject(transform.parent.gameObject);
+        else {
+
+            holdingHand.DetachObject(transform.parent.gameObject);
+
             AttachmentGraphManager graph =FindObjectOfType<AttachmentGraphManager>();
             foreach (KeyValuePair<GameObject, AttachableObject> pair in graph.objectGraph)
             {

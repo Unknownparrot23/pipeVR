@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
+using static AttachmentGraphManager;
 
 public class EverythingIsHeld : MonoBehaviour
 {
@@ -14,6 +16,12 @@ public class EverythingIsHeld : MonoBehaviour
             component.isHeld = true;
             component.hasTriggered = false;
             component.holdingHand = hand;
+        }
+
+        AttachmentGraphManager graph = FindObjectOfType<AttachmentGraphManager>();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            graph.DisconnectObjects(gameObject, transform.GetChild(i).gameObject.name);
         }
     }
     public void OnDetachFromHand(Hand hand)

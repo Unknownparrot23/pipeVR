@@ -13,8 +13,6 @@ public class AttachmentGraphManager : MonoBehaviour
     // Class to represent an attachment point
     public class AttachmentPoint
     {
-
-        // rewrite for game objects
         public string id; // Unique identifier for this attachment point
         public Vector3 localPosition; // Position relative to parent object
         public Quaternion localRotation; // Rotation relative to parent object
@@ -34,7 +32,6 @@ public class AttachmentGraphManager : MonoBehaviour
             this.localRotation = PointObject.transform.localRotation;
         }
     }
-
     // Class to represent an object in our graph
     public class AttachableObject
     {
@@ -62,12 +59,8 @@ public class AttachmentGraphManager : MonoBehaviour
                    attachmentPoints[pointId].connectedObject == null;
         }
     }
-
-    // Main graph storage
-    public Dictionary<GameObject, AttachableObject> objectGraph = new Dictionary<GameObject, AttachableObject>();      
-
-    // Register a new object with its attachment points
-    public void RegisterObject(GameObject obj, Dictionary<string, AttachmentData> attachmentPoints)
+    public Dictionary<GameObject, AttachableObject> objectGraph = new Dictionary<GameObject, AttachableObject>(); // Main graph storage     
+    public void RegisterObject(GameObject obj, Dictionary<string, AttachmentData> attachmentPoints)    // Register a new object with its attachment points
     {
         if (!objectGraph.ContainsKey(obj))
         {
@@ -76,7 +69,8 @@ public class AttachmentGraphManager : MonoBehaviour
 
             foreach (var point in attachmentPoints)
             {
-                newObject.AddAttachmentPoint(point.Key, point.Value.localPosition, point.Value.localRotation,point.Value.PointObject);
+                newObject.AddAttachmentPoint(point.Key, point.Value.localPosition,
+                                            point.Value.localRotation,point.Value.PointObject);
             }
 
             Debug.Log($"Registered object {obj.name} with {attachmentPoints.Count} attachment points");
@@ -90,7 +84,6 @@ public class AttachmentGraphManager : MonoBehaviour
         {
             Debug.Log("Key: " + key.GetInstanceID());
         }
-        Debug.Log("ConnectObjects is called obj1: "+ !objectGraph.ContainsKey(obj1)+ " name: " + obj1.name + "  " + obj1.GetInstanceID()+ "  obj2: " + !objectGraph.ContainsKey(obj2)+" name: "+obj2.name+"  "+ obj2.GetInstanceID());
         if (!objectGraph.ContainsKey(obj1) || !objectGraph.ContainsKey(obj2))
         {
             Debug.LogWarning("One or both objects not registered");
@@ -156,28 +149,20 @@ public class AttachmentGraphManager : MonoBehaviour
         Vector3 offset = worldPos1 - obj2.transform.TransformPoint(aObj2.attachmentPoints[pointId2].localPosition);
         obj2.transform.position += offset;
     }
-
-    // Disconnect two objects
     public void DisconnectObjects(GameObject obj1, string pointId1)
     {
         if (!objectGraph.ContainsKey(obj1) || !objectGraph[obj1].attachmentPoints.ContainsKey(pointId1))
             return;
-
         AttachmentPoint point = objectGraph[obj1].attachmentPoints[pointId1];
         if (point.connectedObject == null)
             return;
-
         GameObject obj2 = point.connectedObject;
         string pointId2 = point.connectedPointId;
 
-        // Clear connection references
         point.connectedObject = null;
         point.connectedPointId = null;
-
         objectGraph[obj2].attachmentPoints[pointId2].connectedObject = null;
         objectGraph[obj2].attachmentPoints[pointId2].connectedPointId = null;
-
-        // Remove from connected objects list if no other connections exist
         if (GetConnectionCount(obj1, obj2) == 0)
         {
             objectGraph[obj1].connectedObjects.Remove(objectGraph[obj2]);
@@ -186,8 +171,6 @@ public class AttachmentGraphManager : MonoBehaviour
 
         Debug.Log($"Disconnected {obj1.name} at {pointId1} from {obj2.name} at {pointId2}");
     }
-
-    // Helper to count how many connections exist between two objects
     private int GetConnectionCount(GameObject obj1, GameObject obj2)
     {
         int count = 0;
@@ -198,8 +181,6 @@ public class AttachmentGraphManager : MonoBehaviour
         }
         return count;
     }
-
-    // Get all objects connected to a specific object
     public List<GameObject> GetConnectedObjects(GameObject obj)
     {
         List<GameObject> result = new List<GameObject>();
@@ -212,8 +193,6 @@ public class AttachmentGraphManager : MonoBehaviour
         }
         return result;
     }
-
-    // Get all attachment points for an object
     public Dictionary<string, AttachmentPoint> GetAttachmentPoints(GameObject obj)
     {
         if (objectGraph.ContainsKey(obj))
@@ -223,7 +202,6 @@ public class AttachmentGraphManager : MonoBehaviour
         return new Dictionary<string, AttachmentPoint>();
     }
 }
-
 [System.Serializable]
 public struct AttachmentData
 {

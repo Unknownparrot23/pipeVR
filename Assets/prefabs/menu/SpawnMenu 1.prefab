@@ -1029,6 +1029,7 @@ GameObject:
   - component: {fileID: 3061647187398058719}
   - component: {fileID: 7023927622990205799}
   - component: {fileID: 6441817689131394729}
+  - component: {fileID: 3706180335417344233}
   m_Layer: 0
   m_Name: SpawnMenu 1
   m_TagString: Untagged
@@ -1167,6 +1168,21 @@ MonoBehaviour:
   objectToSpawn: {fileID: 1154812328571316192, guid: 8ebe764fedca70f40bad92b2f18f4432, type: 3}
   spawnLocation: {fileID: 0}
   spawnButton: {fileID: 6332416906471421749}
+--- !u!114 &3706180335417344233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169323739833610424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5eb024789856b4eb5d29d56d2d7ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 6226861670759363908, guid: a55ff4caeeaff3c48afb78bcd3df8282, type: 3}
+  spawnLocation: {fileID: 0}
+  spawnButton: {fileID: 6567708840998876830}
 --- !u!1 &5595109672486036455
 GameObject:
   m_ObjectHideFlags: 0
