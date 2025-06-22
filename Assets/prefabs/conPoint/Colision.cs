@@ -27,9 +27,20 @@ public class HeldObjectTrigger : MonoBehaviour
     }
     private void OnDetachedFromHand(Hand hand)
     {
-        isHeld = false;
-        holdingHand = null;
-        onlyPoint = false;
+        RestoreHierarchy Restore = GetComponent<RestoreHierarchy>();
+        Transform Part = transform;
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            GameObject PointObject = Part.GetChild(i).gameObject;
+            HeldObjectTrigger component = PointObject.GetComponent<HeldObjectTrigger>();
+            if (component != null)
+            {
+                component.isHeld = false;
+                component.holdingHand = null;
+                component.onlyPoint = false;
+            }
+
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
