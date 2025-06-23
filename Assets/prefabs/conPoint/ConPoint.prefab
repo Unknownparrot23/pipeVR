@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 6242800098071368631}
   - component: {fileID: 6801194918534911623}
   m_Layer: 0
-  m_Name: End
+  m_Name: ConPoint
   m_TagString: ConectionPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
