@@ -9,7 +9,11 @@ using UnityEngine;
 
 
 public class AttachmentGraphManager : MonoBehaviour
-{
+{     
+    [SerializeField] public bool Welds = false;
+    [SerializeField] public GameObject weldPoint=null;
+    [SerializeField] public int numberOfPoints = 12;
+    [SerializeField] public float radiusPoints = 25f;
     // Class to represent an attachment point
     public class AttachmentPoint
     {
@@ -19,6 +23,8 @@ public class AttachmentGraphManager : MonoBehaviour
         public GameObject connectedObject; // What object is attached here
         public string connectedPointId; // Which point on the other object we're connected to
         public GameObject PointObject;
+
+
         public AttachmentPoint(string id,Vector3 localPosition, Quaternion localRotation, GameObject PointObject)
         {
             this.id = id;
@@ -123,6 +129,26 @@ public class AttachmentGraphManager : MonoBehaviour
         PositionConnectedObjects(obj1, pointId1, obj2, pointId2);
 
         Debug.Log($"Connected {obj1.name} at {pointId1} to {obj2.name} at {pointId2}");
+        if (Welds == true)
+        {
+            //obj2.transform.right;
+            for (int i = 0; i <numberOfPoints; i++)
+            {
+                float angle = i * Mathf.PI * 2f / numberOfPoints;
+                float y = Mathf.Cos(angle) * radiusPoints;
+                float z = Mathf.Sin(angle) * radiusPoints;
+                AttachableObject tempOBJ = objectGraph[obj2];
+
+                GameObject weldConection=tempOBJ.attachmentPoints[pointId1].PointObject;
+                Vector3 spawnPosition = weldConection.transform.position+new Vector3(0, y, z);/*weldConection.transform.position + */
+
+                GameObject sphere = Instantiate(weldPoint, spawnPosition, Quaternion.identity, weldConection.transform);
+                // Add to list for connection management
+                // Add WeldComponent if it doesn't exist and connect if needed
+            }
+
+
+        }
         return true;
     }
 

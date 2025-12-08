@@ -93,16 +93,4 @@ public class conectionPointAtachment : MonoBehaviour
             lastCollidedObject = null;
         }
     }
-
-    // Example function that can be called when conditions are met
-    private void TriggerFunction(GameObject otherObject)
-    {
-        Debug.Log($"Triggered with {otherObject.name} after release!");
-
-        // Add your custom functionality here
-        // For example:
-        // otherObject.GetComponent<Renderer>().material.color = Color.green;
-        // Destroy(otherObject);
-        // etc.
-    }
 }
